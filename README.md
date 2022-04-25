@@ -8,4 +8,4 @@ In this repo we covered some React Native concept described below.
   6) Simplify React Native Animation in pie chart.
   7) Will implement more concept in future :-).
 
-  #AirProgramming🚩
+  #r2Programming🚩
