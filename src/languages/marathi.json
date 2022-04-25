@@ -1,0 +1,14 @@
+{
+    "translation": {
+        "Dashboard_Title": "डॅशबोर्ड",
+        "Status_Open": "उघडा",
+        "Status_Close": "बंद",
+        "Status_Overdue": "ओव्हरड्यू",
+        "Total": "पूर्णपणे",
+        "Language": "भाषा",
+        "Close_Estimate_Title": "बंद अंदाजी अभिप्राय",
+        "Open_Estimate_Title": "उघडा अंदाजी अभिप्राय",
+        "Overdue_Estimate_Title": "ओव्हरड्यू अंदाजी अभिप्राय",
+        "Theme": "थीम"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "translation": {
+        "Dashboard_Title": "Dashboard",
+        "Status_Open": "Open",
+        "Status_Close": "Closed",
+        "Status_Overdue": "Overdue",
+        "Total": "Total",
+        "Language": "Language",
+        "Close_Estimate_Title": "Closed Estimate",
+        "Open_Estimate_Title": "Open Estimate",
+        "Overdue_Estimate_Title": "Overdue Estimate",
+        "Theme": "Theme"
+    }
+}
