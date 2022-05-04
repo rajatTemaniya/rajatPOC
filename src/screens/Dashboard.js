@@ -8,6 +8,7 @@ import estimateData from '../assets/apiData/serviceEstimateList.json'
 import { useTranslation } from 'react-i18next'
 import { useTheme } from '../styles/ThemeProviderContext';
 import ThemeModel from '../models/themeModel';
+import TabButtons from '../components/TabButtons';
 
 // theme & setTheme are the useState props, getting from Theme provider
 function Dashboard({ navigation, theme ,setTheme}) {
@@ -27,10 +28,14 @@ function Dashboard({ navigation, theme ,setTheme}) {
     const [getSelectedStatusList, setSelectedStatusList] = React.useState([])
      // Data formate only for pie chart display purpose 
      const [pieData, setPieData] = useState([
-        { x: "Closed", y: 55 },
-        { x: "Open", y: 30 },
-        { x: "Overdue", y: 18 }
+        { x: "Closed", y: 0 },
+        { x: "Open", y: 0 },
+        { x: "Overdue", y: 0 }
     ])
+
+    // useEffect(() => {
+    //     console.log('LANG:',i18n.language);
+    // }, [t])
   
      // Execute Hook 1, Execute at the initialy then execute again if value changed
     useEffect(() => {
@@ -57,6 +62,30 @@ function Dashboard({ navigation, theme ,setTheme}) {
 
     // First prepare card data for default selected chart category 
     const prepareSelectedData = () => {
+        let close = 0
+        let open = 0
+        let overdue = 0
+        estimateData.estimateList.map(item => {
+           switch (item.status) {
+               case "Open":
+                   close ++
+                   break;
+               case "Closed":
+                   open++
+                   break;
+               case "Overdue":
+                   overdue++
+                    break;
+                default:
+                    //return 0            
+           }
+        })
+
+        let copyData = [ ...pieData ];
+             copyData[0] = {...copyData[0], y: close};
+             copyData[1] = {...copyData[1], y: open};
+             copyData[2] = {...copyData[2], y: overdue};
+             setPieData(copyData);
         let selectedData = estimateData.estimateList.filter( item => item.status == getSelectedStatus);
         setSelectedStatusList(selectedData)
     } 
@@ -235,21 +264,21 @@ function Dashboard({ navigation, theme ,setTheme}) {
                     </Svg>
                     <View style={{ position: 'absolute' }}>
                         <Text style={{ textAlign: 'center', color: theme.TEXT_COLOR }}>{t('Total')}</Text>
-                        <Text style={{ textAlign: 'center', color: theme.TEXT_COLOR }}> 69 NOS </Text>
+                        <Text style={{ textAlign: 'center', color: theme.TEXT_COLOR }}>nos { pieData[0].y + pieData[1].y + pieData[2].y }</Text>
                     </View>
               </View>
               <View style={{ padding: 5, width: '50%', justifyContent: 'center', alignItems: 'flex-start' }}>
                  <View style={{flexDirection: 'row'}}>
                     <View style={[styles.circle, {backgroundColor: 'green'}]}></View>
-                    <Text style={{color: theme.TEXT_COLOR}}>{t('Status_Close')}: 5 nos</Text>
+                    <Text style={{color: theme.TEXT_COLOR}}>{t('Status_Close')}: {pieData[0].y} nos</Text>
                  </View>
                  <View style={{flexDirection: 'row'}}>
                     <View style={[styles.circle, {backgroundColor: '#FFD573',}]}></View>
-                    <Text style={{color: theme.TEXT_COLOR}}>{t('Status_Open')}: 5 nos</Text>
+                    <Text style={{color: theme.TEXT_COLOR}}>{t('Status_Open')}: {pieData[1].y} nos</Text>
                  </View>
                  <View style={{flexDirection: 'row'}}>
                     <View style={[styles.circle, {backgroundColor: '#FF0000',}]}></View>
-                    <Text style={{color: theme.TEXT_COLOR}}>{t('Status_Overdue')}: 5 nos</Text>
+                    <Text style={{color: theme.TEXT_COLOR}}>{t('Status_Overdue')}: {pieData[2].y} nos</Text>
                  </View>
               </View>
             </Animated.View>
@@ -257,7 +286,11 @@ function Dashboard({ navigation, theme ,setTheme}) {
     }
     // Main render function
     return (
-        <ScrollView style={{backgroundColor: theme.BACKGROUND_COLOR}} contentInsetAdjustmentBehavior="automatic" >
+       <View style={{backgroundColor: theme.BACKGROUND_COLOR}}>
+            {/* Tabs */}
+            <TabButtons  theme={theme}/>
+        <ScrollView keyboardShouldPersistTaps="always" >
+           
             {/* Render Pie Chart */}
             <PieChart />
 
@@ -291,6 +324,7 @@ function Dashboard({ navigation, theme ,setTheme}) {
             {
                 isLangModelOpen && (
                     <LanguageModel 
+                        currentLang= {i18n.language}
                         showModel= {isLangModelOpen}
                         onCancelPressed= { () => onCancelPressed()} 
                         onLangSelect= { (item) => onLangSelect(item)} />
@@ -298,6 +332,7 @@ function Dashboard({ navigation, theme ,setTheme}) {
             }
            
         </ScrollView>
+        </View> 
     )
 }
 
