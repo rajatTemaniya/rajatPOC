@@ -9,6 +9,11 @@
         "Close_Estimate_Title": "निष्क्रिय अनुमान",
         "Open_Estimate_Title": "सक्रिय अनुमान",
         "Overdue_Estimate_Title": "अतिदेय अनुमान",
-        "Theme": "थीम"
+        "Theme": "थीम",
+        "Job": "जॉब",
+        "Card": "कार्ड",
+        "Service": "सर्विस",
+        "Appointments": "अपॉइंटमेंट्स",
+        "Estimates": "एस्टिमेट्स"
     }
 }

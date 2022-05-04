@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, ImageBackground } from 'react-native';
 import Modal from "react-native-modal";
 
-function languageModel({ onCancelPressed, showModel, onLangSelect }) {
+function languageModel({ onCancelPressed, showModel, onLangSelect, currentLang }) {
 
     // For mentain isVisible inside this modal only
     const [ getShowModal, setShowModal ] = useState(showModel)
@@ -14,6 +14,7 @@ function languageModel({ onCancelPressed, showModel, onLangSelect }) {
 
      // You knows right :-) No magic just true code
     const passLangValue = (value) => {
+        setShowModal(false)
         setTimeout(() => {
             onLangSelect(value)
         }, 350);
@@ -27,9 +28,10 @@ function languageModel({ onCancelPressed, showModel, onLangSelect }) {
             animationOut="lightSpeedOut"
             animationInTiming={300}
             animationOutTiming={350}
+            onBackdropPress={onCancelPressed}
             backdropOpacity={0.8}
             onBackButtonPress={onCancelPressed}>
-                <ImageBackground style={{ height: '60%',width: '75%', opacity: 0.7 }}  source={require('../assets/images/rama_logo.png')}>
+                <ImageBackground style={{ height: '60%',width: '75%' }} >
                     <View style={styles.background}>
                 
                         <FlatList
@@ -38,8 +40,8 @@ function languageModel({ onCancelPressed, showModel, onLangSelect }) {
                             keyExtractor={(item, index) => index.toString()}
                             renderItem={({ item }) => {
                                 return (
-                                    <TouchableOpacity style={{ margin: 2}} onPressIn={() => setShowModal(false) } onPress={() =>  passLangValue(item) }>
-                                        <View style={{backgroundColor: '#e07204', padding: 5, margin: 0.5, borderBottomColor: 'orange', borderWidth: 0.5, borderRadius: 3}}>
+                                    <TouchableOpacity style={{margin: 4}} onPress={() =>  passLangValue(item) }>
+                                        <View style={[currentLang == item.code ? styles.activeLang: {}, {backgroundColor: '#e07204', padding: 5, borderWidth: 0.5, borderRadius: 3 }]}>
                                             <Text style={{color: 'black', textAlign: 'center', fontWeight: '600'}}>{item.label}</Text>
                                         </View>
                                     </TouchableOpacity>
@@ -62,5 +64,10 @@ const styles = StyleSheet.create({
         width: '100%',
         padding: 1,
         alignItems: "center",
-    },   
+    },
+    activeLang: {
+       color: 'white',
+       backgroundColor: 'red',
+       opacity: 0.6
+    }   
 })

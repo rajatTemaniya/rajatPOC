@@ -9,6 +9,11 @@
         "Close_Estimate_Title": "बंद अंदाजी अभिप्राय",
         "Open_Estimate_Title": "उघडा अंदाजी अभिप्राय",
         "Overdue_Estimate_Title": "ओव्हरड्यू अंदाजी अभिप्राय",
-        "Theme": "थीम"
+        "Theme": "थीम",
+        "Job": "जॉब",
+        "Card": "कार्ड",
+        "Service": "सर्विस",
+        "Appointments": "अँपॉईंटमेंट्स",
+        "Estimates": "एस्टीमॅट्स"
     }
 }

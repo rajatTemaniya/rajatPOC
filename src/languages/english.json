@@ -9,6 +9,11 @@
         "Close_Estimate_Title": "Closed Estimate",
         "Open_Estimate_Title": "Open Estimate",
         "Overdue_Estimate_Title": "Overdue Estimate",
-        "Theme": "Theme"
+        "Theme": "Theme",
+        "Job": "Job",
+        "Card": "Card",
+        "Service": "Service",
+        "Appointments": "Appointments",
+        "Estimates": "Estimates"
     }
 }

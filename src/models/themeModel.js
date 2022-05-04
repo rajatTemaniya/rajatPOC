@@ -16,6 +16,7 @@ function themeModel({onCancelPressed,showModel, onThemeSelect}) {
 
     // You knows right :-) No magic just true code
     const passThemeValue = (value) => {
+        setShowModal(false)
         setTimeout(() => {
             onThemeSelect(value)
         }, 350);
@@ -31,9 +32,10 @@ function themeModel({onCancelPressed,showModel, onThemeSelect}) {
                 animationInTiming={300}
                 animationOutTiming={350}
                 backdropOpacity={0.8}
+                onBackdropPress={onCancelPressed}
                 onBackButtonPress={onCancelPressed}>
                     <View>
-                        <Image style={{ height: 150 ,width: 150, bottom: 74, right: 2 }} source={require('../assets/images/theme_animation.png')}/>
+                        {/* <Image style={{ height: 150 ,width: 150, bottom: 74, right: 2 }} /> */}
                     </View>
                   
                     <FlatList
@@ -42,8 +44,8 @@ function themeModel({onCancelPressed,showModel, onThemeSelect}) {
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={({ item }) => {
                             return (
-                                <TouchableOpacity style={{ margin: 2}} onPressIn={() => setShowModal(false) } onPress={() => { passThemeValue(item.value)}}>
-                                    <View style={{backgroundColor: item.color, padding: 5, margin: 0.5, borderBottomColor: 'orange', borderWidth: 0.5, borderRadius: 3}}>
+                                <TouchableOpacity style={{ margin: 4 }} onPress={() => { passThemeValue(item.value)}}>
+                                    <View style={{backgroundColor: item.color, padding: 5, margin: 0.5, borderBottomColor: 'black', borderWidth: 0.5, borderRadius: 3}}>
                                         <Text style={{color: item.textColor, textAlign: 'center', fontWeight: '600'}}>{item.label}</Text>
                                     </View>
                                 </TouchableOpacity>
