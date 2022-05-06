@@ -5,9 +5,16 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "android-clean": "cd android && ./gradlew clean && ./gradlew cleanBuildCache",
+    "android-release-apk": "cd android && ./gradlew clean && ./gradlew cleanBuildCache && ./gradlew assembleRelease",
+    "android-release-aab": "cd android && ./gradlew clean && ./gradlew cleanBuildCache && ./gradlew bundleRelease",
+    "android-run-release": "react-native run-android --variant=release",
+    "android-pre-release": "react-native bundle --platform android --dev false --minify true --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle",
+    "android-release": "cd android && ./gradlew clean && ./gradlew cleanBuildCache && ./gradlew assembleRelease && ./gradlew bundleRelease",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "postinstall": "npx jetify"
   },
   "dependencies": {
     "@react-navigation/native": "^6.0.10",
@@ -21,6 +28,7 @@
     "react-native-screens": "^3.13.1",
     "react-native-splash-screen": "^3.3.0",
     "react-native-svg": "^12.3.0",
+    "react-native-vector-icons": "^9.1.0",
     "victory-native": "^36.3.2"
   },
   "devDependencies": {
